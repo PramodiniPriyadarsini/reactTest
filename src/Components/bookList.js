@@ -1,3 +1,5 @@
+
+/*eslint no-use-before-define: ["error", { "variables": false }]*/
 import React, { Component } from 'react'
 import bookDataList from '../mock/getHotelBookData';
 
@@ -9,44 +11,48 @@ export default class bookList extends Component {
       groupBookDataList: bookDataList
     };
   }
-  groupBookDataList =(obj)=>{
-    let groupBookDataList = this.state.bookDataList;
 
-    groupBookDataList = groupBookDataList.reduce((acc, item) => {
 
+  componentDidMount() {
+    let {bookDataList} = this.state;
+    if(bookDataList){
+      return this.groupBookDataList1(bookDataList);
+    }
+  }
+
+  groupBookDataList1 = (obj) =>{
+    let group = obj.reduce((acc, item) => {
       if (!acc[item.roomTypeLabel]) {
-    
         acc[item.roomTypeLabel] = [];
-    
       }
     
       acc[item.roomTypeLabel].push(item);
-      console.log("acc" + acc)
       return acc;
-    })
-
-    this.setState({
-       groupBookDataList
-    })
+    },{})
+    //const groupArray = Object.entries(group).map((e) => ( { [e[0]]: e[1] } ));
+   // console.log("list" + abc);
+    this.setState({groupBookDataList: group})
   }
 
- 
   render() {
     const {groupBookDataList} = this.state;
-    
+
     return (
-      <div>
-          {
-            groupBookDataList.map((obj)=>{
+        <div>
+            {
+              Object.keys(groupBookDataList).map(name => {
                 return (
-                    <ul>
-                        <li>
-                           {obj.price}
-                        </li>
-                    </ul>
+                  <div>
+                    <div>{name}</div>
+                    {
+                      groupBookDataList[name].map(data => {
+                        return <div>{data.totalPrice}</div> 
+                      })
+                    }
+                  </div>
                 )
-            })
-          }
+              })
+            }
       </div>
     )
   }
