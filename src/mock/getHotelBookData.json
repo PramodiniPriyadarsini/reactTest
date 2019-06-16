@@ -1233,7 +1233,7 @@
     "images" : null,
     "specialOffers" : [],
     "surcharges" : null,
-    "nightlyRates" : null,
+    "nightlyRates" : null,  
     "cancelFreeBeforeDate" : "2018-09-07T23:59:00",
     "roomCancelCharges" : [
       {

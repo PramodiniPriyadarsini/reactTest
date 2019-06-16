@@ -1,0 +1,11 @@
+.list-column{
+    margin: 0px;
+    padding: 0px;
+}
+
+.list-column li{
+    list-style-type: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
